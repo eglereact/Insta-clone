@@ -3,26 +3,31 @@ const data = [
     id: '1',
     name: 'Duane King',
     avatar: 'https://randomuser.me/api/portraits/men/74.jpg',
+    company: 'Google',
   },
   {
     id: '2',
     name: 'Vladimir Oblast',
     avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
+    company: 'Mate',
   },
   {
     id: '3',
     name: 'Lucille Brooks',
     avatar: 'https://randomuser.me/api/portraits/women/74.jpg',
+    company: 'Wave',
   },
   {
     id: '4',
     name: 'Vicki Johnson',
     avatar: 'https://randomuser.me/api/portraits/women/75.jpg',
+    company: 'Bing',
   },
   {
     id: '5',
     name: 'Patsy Walters',
     avatar: 'https://randomuser.me/api/portraits/women/73.jpg',
+    company: 'Safari',
   },
   {
     id: '6',
