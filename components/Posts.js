@@ -1,4 +1,4 @@
-import Post from './Post'
+import Post from './Post';
 
 function Posts() {
   const posts = [
@@ -16,7 +16,7 @@ function Posts() {
       img: 'https://randomuser.me/api/portraits/men/61.jpg',
       caption: 'This is funny. Hehehe',
     },
-  ]
+  ];
 
   return (
     <div>
@@ -31,7 +31,7 @@ function Posts() {
         />
       ))}
     </div>
-  )
+  );
 }
 
-export default Posts
+export default Posts;

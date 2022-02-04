@@ -1,5 +1,5 @@
-import React from 'react'
-import data from './data'
+import React from 'react';
+import data from './data';
 
 function Suggestions() {
   return (
@@ -15,18 +15,16 @@ function Suggestions() {
             src={profile.avatar}
           />
           <div className="ml-4 flex-1">
-            <h2 className="text-semibold" text-sm>
-              {profile.name}
-              <h3 className="text-xs text-gray-400">
-                Works at {profile.company}
-              </h3>
-            </h2>
+            <h2 className="text-semibold text-sm">{profile.name}</h2>
+            <h3 className="text-xs text-gray-400">
+              Works at {profile.company}
+            </h3>
           </div>
           <button className="text-bold text-xs text-blue-400">Follow</button>
         </div>
       ))}
     </div>
-  )
+  );
 }
 
-export default Suggestions
+export default Suggestions;

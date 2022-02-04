@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 function MiniProfile() {
   return (
@@ -10,13 +10,11 @@ function MiniProfile() {
       />
       <div className="mx-4 flex-1">
         <h2 className="font-bold">Joe Soe</h2>
-        <h3 className="text-sm" text-gray-400>
-          Welcome to Margatni
-        </h3>
+        <h3 className="text-sm text-gray-400">Welcome to Margatni</h3>
       </div>
       <button className="text-sm font-semibold text-blue-400">Sign Out</button>
     </div>
-  )
+  );
 }
 
-export default MiniProfile
+export default MiniProfile;
