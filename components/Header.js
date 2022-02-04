@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from 'next/image';
 import {
   SearchIcon,
   PlusCircleIcon,
@@ -6,10 +6,13 @@ import {
   MenuIcon,
   PaperAirplaneIcon,
   UserGroupIcon,
-} from '@heroicons/react/outline'
-import { HomeIcon } from '@heroicons/react/solid'
+} from '@heroicons/react/outline';
+import { HomeIcon } from '@heroicons/react/solid';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 function Header() {
+  const { data: session } = useSession();
+
   return (
     <div className="sticky top-0 z-50 border-b bg-white shadow-sm">
       <div className="mx-5 flex max-w-6xl justify-between bg-white xl:mx-auto">
@@ -37,28 +40,36 @@ function Header() {
             />
           </div>
         </div>
+
         {/* Right */}
         <div className="flex items-center justify-end space-x-4">
           <HomeIcon className="navBtn" />
           <MenuIcon className="h-6 cursor-pointer md:hidden" />
-          <div className="navBtn relative">
-            <PaperAirplaneIcon className="navBtn" />
-            <div className=" absolute -right-2 -top-1 flex h-5 w-5 animate-pulse items-center justify-center rounded-full bg-red-500 text-xs text-white">
-              3
-            </div>
-          </div>
-          <PlusCircleIcon className="navBtn" />
-          <UserGroupIcon className="navBtn" />
-          <HeartIcon className="navBtn" />
-          <img
-            src="/images/prof.png"
-            alt=""
-            className="h-10 cursor-pointer rounded-full"
-          />
+          {session ? (
+            <>
+              <div className="navBtn relative">
+                <PaperAirplaneIcon className="navBtn" />
+                <div className=" absolute -right-2 -top-1 flex h-5 w-5 animate-pulse items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                  3
+                </div>
+              </div>
+              <PlusCircleIcon className="navBtn" />
+              <UserGroupIcon className="navBtn" />
+              <HeartIcon className="navBtn" />
+              <img
+                onClick={signOut}
+                src={session.user?.image}
+                alt=""
+                className="h-10 w-10 cursor-pointer rounded-full"
+              />
+            </>
+          ) : (
+            <button onClick={signIn}>Sign In</button>
+          )}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;
