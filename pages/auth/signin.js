@@ -1,15 +1,29 @@
 import { getProviders, signIn } from 'next-auth/react';
+import Header from './../../components/Header';
 
 function signin({ providers }) {
   return (
     <>
-      {Object.values(providers).map((provider) => (
-        <div key={provider.name}>
-          <button onClick={() => signIn(provider.id)}>
-            Sign in with {provider.name}
-          </button>
+      <Header />
+
+      <div className="-mt-8  flex min-h-screen flex-col items-center justify-center py-2 px-14 text-center">
+        <img className="w-80" src="/images/insta.png" alt="" />
+        <p className="font-xs italic">
+          This is not a real app, it is built for educational purpuses.
+        </p>
+        <div className="mt-40">
+          {Object.values(providers).map((provider) => (
+            <div key={provider.name}>
+              <button
+                className="rounded-lg bg-blue-500 p-3 text-white"
+                onClick={() => signIn(provider.id, { callbackUrl: '/' })}
+              >
+                Sign in with {provider.name}
+              </button>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </>
   );
 }
