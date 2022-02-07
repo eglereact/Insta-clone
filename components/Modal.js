@@ -1,4 +1,4 @@
-import { Snapshot, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { modalState } from '../atoms/modalAtom';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useRef, useState } from 'react';
