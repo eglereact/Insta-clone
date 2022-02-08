@@ -7,15 +7,33 @@ import {
   PaperAirplaneIcon,
 } from '@heroicons/react/outline';
 import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { db } from '../firebase';
+import Moment from 'react-moment';
 
 function Post({ username, id, img, userImg, caption }) {
   const { data: session } = useSession();
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    onSnapshot(
+      query(
+        collection(db, 'posts', id, 'comments'),
+        orderBy('timestamp', 'desc')
+      ),
+      (snapshot) => setComments(snapshot.docs)
+    );
+  }, [db]);
 
   const sendComment = async (e) => {
     e.preventDefault();
@@ -58,6 +76,28 @@ function Post({ username, id, img, userImg, caption }) {
         <span className="mr-1 font-bold">{username} </span>
         {caption}
       </p>
+
+      {comments.length > 0 && (
+        <div className="ml-10 h-20 overflow-y-scroll scrollbar-thin scrollbar-thumb-black">
+          {comments.map((comment) => (
+            <div key={comment.id} className="mb-3 flex items-center space-x-2">
+              <img
+                className="h-7 rounded-full"
+                src={comment.data().userImage}
+                alt=""
+              />
+              <p className="flex-1 text-sm">
+                <span className="font-bold">{comment.data().username} </span>
+                {comment.data().comment}
+              </p>
+              <Moment fromNow className="pr-5 text-sm">
+                {comment.data().timestamp?.toDate()}
+              </Moment>
+            </div>
+          ))}
+        </div>
+      )}
+
       {session && (
         <form className="flex items-center p-4">
           <EmojiHappyIcon className="h-7" />
